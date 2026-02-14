@@ -92,52 +92,28 @@ function create3DStarfield(count) {
 }
 
 function setup3DParallax(container, layers) {
-    let currentX = 0, currentY = 0, targetX = 0, targetY = 0, isInteracting = false;
+    // Use new GyroParallax for better landscape support
+    if (window.GyroParallax) {
+        window.GyroParallax.init(container, layers);
+        return;
+    }
 
+    // Fallback: simple animation without interaction
+    let currentX = 0, currentY = 0;
     function animate() {
-        if (!isInteracting) { targetX *= 0.98; targetY *= 0.98; }
-        currentX += (targetX - currentX) * 0.08;
-        currentY += (targetY - currentY) * 0.08;
+        // Subtle automatic drift
+        currentX = Math.sin(Date.now() / 3000) * 0.1;
+        currentY = Math.cos(Date.now() / 4000) * 0.1;
 
         layers.forEach(layer => {
-            const depth = parseFloat(layer.dataset.depth);
-            const moveX = currentX * depth * 100;
-            const moveY = currentY * depth * 100;
-            layer.style.transform = `translate3d(${moveX}px, ${moveY}px, 0) rotateX(${currentY * depth * 10}deg) rotateY(${-currentX * depth * 10}deg)`;
+            const depth = parseFloat(layer.dataset.depth) || 0.1;
+            const moveX = currentX * depth * 50;
+            const moveY = currentY * depth * 50;
+            layer.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
         });
         requestAnimationFrame(animate);
     }
     animate();
-
-    container.addEventListener('mousemove', (e) => {
-        isInteracting = true;
-        const rect = container.getBoundingClientRect();
-        targetX = (e.clientX - rect.width / 2) / (rect.width / 2);
-        targetY = (e.clientY - rect.height / 2) / (rect.height / 2);
-    });
-    container.addEventListener('mouseleave', () => { isInteracting = false; });
-
-    let touchStartX = 0, touchStartY = 0;
-    container.addEventListener('touchstart', (e) => { isInteracting = true; touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY; }, { passive: true });
-    container.addEventListener('touchmove', (e) => {
-        const touch = e.touches[0];
-        targetX = Math.max(-1, Math.min(1, targetX + (touch.clientX - touchStartX) / 150));
-        targetY = Math.max(-1, Math.min(1, targetY + (touch.clientY - touchStartY) / 150));
-        touchStartX = touch.clientX; touchStartY = touch.clientY;
-    }, { passive: true });
-    container.addEventListener('touchend', () => { isInteracting = false; }, { passive: true });
-
-    if (window.DeviceOrientationEvent) {
-        window.addEventListener('deviceorientation', (e) => {
-            if (e.gamma !== null && e.beta !== null) {
-                isInteracting = true;
-                targetX = Math.max(-1, Math.min(1, e.gamma / 30));
-                targetY = Math.max(-1, Math.min(1, (e.beta - 45) / 30));
-                clearTimeout(container.gyroTimeout);
-                container.gyroTimeout = setTimeout(() => { isInteracting = false; }, 100);
-            }
-        }, { passive: true });
-    }
 }
 
 function createShootingStars(container) {

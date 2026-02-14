@@ -39,9 +39,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Setup music
     setupMusic();
     
-    // Initialize new features
-    initLoveQuote();
-    initValentineCountdown();
+    // New features disabled
+    // initLoveQuote();
+    // initValentineCountdown();
     
     // Unlock time_keeper achievement
     if (window.achievements) {
@@ -108,99 +108,28 @@ function create3DStarfield(count) {
 
 // ==================== 3D PARALLAX INTERACTION ====================
 function setup3DParallax(container, layers) {
-    let currentX = 0;
-    let currentY = 0;
-    let targetX = 0;
-    let targetY = 0;
-    let isInteracting = false;
+    // Use new GyroParallax for better landscape support
+    if (window.GyroParallax) {
+        window.GyroParallax.init(container, layers);
+        return;
+    }
 
-    // Smooth animation loop
+    // Fallback: simple animation without interaction
+    let currentX = 0, currentY = 0;
     function animate() {
-        if (!isInteracting) {
-            // Slowly return to center
-            targetX *= 0.98;
-            targetY *= 0.98;
-        }
+        // Subtle automatic drift
+        currentX = Math.sin(Date.now() / 3000) * 0.1;
+        currentY = Math.cos(Date.now() / 4000) * 0.1;
 
-        // Smooth interpolation
-        currentX += (targetX - currentX) * 0.08;
-        currentY += (targetY - currentY) * 0.08;
-
-        // Apply parallax to each layer
         layers.forEach(layer => {
-            const depth = parseFloat(layer.dataset.depth);
-            const moveX = currentX * depth * 100; // Increased from 50
-            const moveY = currentY * depth * 100; // Increased from 50
-            const rotateX = currentY * depth * 10; // Increased from 5
-            const rotateY = -currentX * depth * 10; // Increased from 5
-
-            layer.style.transform = `
-                translate3d(${moveX}px, ${moveY}px, 0)
-                rotateX(${rotateX}deg)
-                rotateY(${rotateY}deg)
-            `;
+            const depth = parseFloat(layer.dataset.depth) || 0.1;
+            const moveX = currentX * depth * 50;
+            const moveY = currentY * depth * 50;
+            layer.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
         });
-
         requestAnimationFrame(animate);
     }
     animate();
-
-    // Mouse movement
-    container.addEventListener('mousemove', (e) => {
-        isInteracting = true;
-        const rect = container.getBoundingClientRect();
-        targetX = (e.clientX - rect.width / 2) / (rect.width / 2);
-        targetY = (e.clientY - rect.height / 2) / (rect.height / 2);
-    });
-
-    container.addEventListener('mouseleave', () => {
-        isInteracting = false;
-    });
-
-    // Touch movement
-    let touchStartX = 0;
-    let touchStartY = 0;
-
-    container.addEventListener('touchstart', (e) => {
-        isInteracting = true;
-        touchStartX = e.touches[0].clientX;
-        touchStartY = e.touches[0].clientY;
-    }, { passive: true });
-
-    container.addEventListener('touchmove', (e) => {
-        const touch = e.touches[0];
-        const deltaX = (touch.clientX - touchStartX) / 50; // More sensitive
-        const deltaY = (touch.clientY - touchStartY) / 50; // More sensitive
-
-        targetX = Math.max(-1, Math.min(1, targetX + deltaX * 0.3)); // Increased from 0.1
-        targetY = Math.max(-1, Math.min(1, targetY + deltaY * 0.3)); // Increased from 0.1
-
-        touchStartX = touch.clientX;
-        touchStartY = touch.clientY;
-    }, { passive: true });
-
-    container.addEventListener('touchend', () => {
-        isInteracting = false;
-    }, { passive: true });
-
-    // Device orientation (gyroscope)
-    if (window.DeviceOrientationEvent) {
-        window.addEventListener('deviceorientation', (e) => {
-            if (e.gamma !== null && e.beta !== null) {
-                isInteracting = true;
-                // gamma: left/right tilt (-90 to 90)
-                // beta: front/back tilt (-180 to 180)
-                targetX = Math.max(-1, Math.min(1, e.gamma / 30));
-                targetY = Math.max(-1, Math.min(1, (e.beta - 45) / 30));
-
-                // Auto-release after a moment
-                clearTimeout(container.gyroTimeout);
-                container.gyroTimeout = setTimeout(() => {
-                    isInteracting = false;
-                }, 100);
-            }
-        }, { passive: true });
-    }
 }
 
 // Create shooting stars effect

@@ -655,11 +655,20 @@
     position: fixed;
     inset: 0;
     z-index: 99999;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
-    pointer-events: none;
+    pointer-events: none !important;
     overflow: hidden;
+}
+
+.page-transition-overlay.active {
+    display: flex;
+}
+
+.page-transition-overlay,
+.page-transition-overlay * {
+    pointer-events: none !important;
 }
 
 /* Heart transition */
@@ -749,7 +758,7 @@ body.page-exiting {
     overflow: hidden;
 }
 
-body.page-exiting > *:not(.page-transition-overlay) {
+body.page-exiting > *:not(.page-transition-overlay):not(.intro-screen):not(#intro-screen) {
     animation: contentFade 0.3s ease forwards;
 }
 
@@ -757,7 +766,7 @@ body.page-exiting > *:not(.page-transition-overlay) {
     to { opacity: 0.3; transform: scale(0.98); }
 }
 
-body.page-loaded > *:not(.page-transition-overlay) {
+body.page-loaded > *:not(.page-transition-overlay):not(.intro-screen):not(#intro-screen) {
     animation: contentEnter 0.5s ease both;
 }
 

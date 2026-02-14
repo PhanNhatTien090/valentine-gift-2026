@@ -244,7 +244,7 @@ body::-webkit-scrollbar-thumb {
     height: 100%;
     overflow: hidden;
     z-index: 1;
-    pointer-events: all; /* Enable interaction */
+    pointer-events: none; /* Disable interaction - allow clicks to pass through */
     perspective: 1000px;
     transform-style: preserve-3d;
     background: radial-gradient(ellipse at center, #1a0a2e 0%, #0a0a1a 70%, #050510 100%);
@@ -367,6 +367,7 @@ body::-webkit-scrollbar-thumb {
 
 @keyframes shootingStar {
     0% {
+        transform: rotate(135deg) translate(0, 0);
         opacity: 1;
     }
     70% {
@@ -2349,6 +2350,7 @@ body::-webkit-scrollbar-thumb {
     overflow: hidden;
     height: 100vh;
     width: 100vw;
+    overflow-x: hidden !important;
 }
 
 .love-timer-section {
@@ -2378,7 +2380,7 @@ body::-webkit-scrollbar-thumb {
     border-radius: 3vmin;
     padding: 2vh 3vw;
     max-width: 90vw;
-    max-height: 92vh;
+    max-height: 95vh;
     width: auto;
     text-align: center;
     box-shadow: 
@@ -2390,6 +2392,7 @@ body::-webkit-scrollbar-thumb {
     justify-content: center;
     gap: 1.5vh;
     pointer-events: auto; /* Re-enable interaction for content */
+    overflow: hidden;
 }
 
 @keyframes containerFadeIn {
@@ -3829,14 +3832,14 @@ body::-webkit-scrollbar-thumb {
 
 /* ==================== LOVE QUOTE SECTION ==================== */
 .love-quote-section {
-    margin: 30px auto;
+    margin: 3px auto;
     max-width: 500px;
     padding: 0 20px;
 }
 
 .love-quote-section .quote-box {
     position: relative;
-    padding: 25px 30px;
+    padding: 2px 3px;
     background: linear-gradient(135deg, rgba(255, 20, 147, 0.1), rgba(255, 105, 180, 0.05));
     border-left: 4px solid #ff69b4;
     border-radius: 0 12px 12px 0;

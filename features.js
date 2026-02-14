@@ -114,7 +114,8 @@ class AchievementSystem {
         this.unlocked.push(id);
         localStorage.setItem('achievements', JSON.stringify(this.unlocked));
         
-        this.showNotification(this.achievements[id]);
+        // Notification disabled
+        // this.showNotification(this.achievements[id]);
     }
     
     // Show achievement notification
