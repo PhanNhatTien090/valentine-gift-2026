@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     // ==================== NEW FEATURES ====================
     initSecretMessage();
+    initScratchCard();
     
     // Unlock romantic achievement
     if (window.achievements) {
@@ -513,4 +514,21 @@ function showSecretMessage() {
             setTimeout(() => overlay.remove(), 300);
         }
     });
+}
+
+// ==================== SCRATCH CARD INIT ====================
+function initScratchCard() {
+    if (window.ScratchCard) {
+        ScratchCard.init('scratch-card-container', {
+            width: 280,
+            height: 180,
+            brushSize: 35,
+            message: '💝 Anh yêu em mãi mãi! 💝\n\nEm là điều tuyệt vời nhất đến với anh ✨',
+            onReveal: () => {
+                if (window.AchievementSystem) {
+                    AchievementSystem.unlock('secret_finder');
+                }
+            }
+        });
+    }
 }

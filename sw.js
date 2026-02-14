@@ -4,7 +4,7 @@
  * Cache-first strategy with network fallback
  */
 
-const CACHE_NAME = 'valentine-v2';
+const CACHE_NAME = 'valentine-v3';
 const OFFLINE_URL = '/index.html';
 
 // Assets to cache on install
@@ -26,6 +26,9 @@ const ASSETS_TO_CACHE = [
     '/performance.js',
     '/haptic.js',
     '/sound-effects.js',
+    '/features.js',
+    '/scratch-card.js',
+    '/page-transitions.js',
     '/manifest.json'
 ];
 
