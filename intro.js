@@ -134,26 +134,26 @@ function createShootingStars(container) {
     // Use object pool for better performance
     if (window.PerfUtils && window.PerfUtils.ShootingStarPool) {
         const pool = new window.PerfUtils.ShootingStarPool(container, 8);
-        
+
         setTimeout(() => {
             const sizeRoll = Math.random();
             const size = sizeRoll < 0.25 ? 'small' : sizeRoll > 0.85 ? 'large' : 'normal';
             pool.acquire(size);
         }, 1000);
-        
+
         setInterval(() => {
             const sizeRoll = Math.random();
             const size = sizeRoll < 0.25 ? 'small' : sizeRoll > 0.85 ? 'large' : 'normal';
             pool.acquire(size);
-            
+
             if (Math.random() > 0.8) {
                 setTimeout(() => pool.acquire('small'), 300);
             }
         }, 2500);
-        
+
         return;
     }
-    
+
     // Fallback
     function addShootingStar() {
         const shootingStar = document.createElement('div');
@@ -213,10 +213,24 @@ function typeWriter(text, element, speed = 100) {
 
 // ==================== OPEN BUTTON HANDLER ====================
 function handleOpenClick() {
+    // Play sound effect and haptic
+    if (typeof sfx !== 'undefined') sfx.play('success');
+    if (typeof Haptic !== 'undefined') Haptic.success();
+    
+    // Confetti burst on open
+    if (typeof Confetti !== 'undefined') {
+        Confetti.burst(window.innerWidth / 2, window.innerHeight / 2);
+    }
+    
     // Try to play music
     if (elements.bgMusic) {
         elements.bgMusic.volume = 0.5;
-        elements.bgMusic.play().catch(e => console.log('Music autoplay blocked'));
+        elements.bgMusic.play().then(() => {
+            // Unlock music_lover achievement
+            if (typeof AchievementSystem !== 'undefined') {
+                AchievementSystem.unlock('music_lover');
+            }
+        }).catch(e => console.log('Music autoplay blocked'));
 
         // Store music state in sessionStorage
         sessionStorage.setItem('musicPlaying', 'true');

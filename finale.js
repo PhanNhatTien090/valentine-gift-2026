@@ -19,6 +19,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // ==================== REPLAY BUTTON ====================
     initReplayButton();
+    
+    // ==================== NEW FEATURES ====================
+    initSecretMessage();
+    
+    // Unlock romantic achievement
+    if (window.achievements) {
+        window.achievements.unlock('romantic');
+    }
+    
+    // Celebrate with confetti and haptic
+    setTimeout(() => {
+        if (window.Confetti) {
+            window.Confetti.celebrate();
+        }
+        if (window.Haptic) {
+            window.Haptic.heartbeat();
+        }
+    }, 1500);
 });
 
 // ==================== 3D STARFIELD BACKGROUND ====================
@@ -125,26 +143,26 @@ function createShootingStars(container) {
     // Use object pool for better performance
     if (window.PerfUtils && window.PerfUtils.ShootingStarPool) {
         const pool = new window.PerfUtils.ShootingStarPool(container, 8);
-        
+
         setTimeout(() => {
             const sizeRoll = Math.random();
             const size = sizeRoll < 0.25 ? 'small' : sizeRoll > 0.85 ? 'large' : 'normal';
             pool.acquire(size);
         }, 1000);
-        
+
         setInterval(() => {
             const sizeRoll = Math.random();
             const size = sizeRoll < 0.25 ? 'small' : sizeRoll > 0.85 ? 'large' : 'normal';
             pool.acquire(size);
-            
+
             if (Math.random() > 0.8) {
                 setTimeout(() => pool.acquire('small'), 300);
             }
         }, 2500);
-        
+
         return;
     }
-    
+
     // Fallback
     function addShootingStar() {
         const shootingStar = document.createElement('div');
@@ -360,6 +378,139 @@ function initReplayButton() {
         replayBtn.addEventListener('click', () => {
             sessionStorage.removeItem('musicPlaying');
             window.location.href = 'index.html';
+            
+            // Sound effect
+            if (window.sfx) window.sfx.play('whoosh');
         });
     }
+}
+
+// ==================== SECRET MESSAGE ====================
+function initSecretMessage() {
+    let clickCount = 0;
+    const requiredClicks = 7;
+    const finaleContent = document.querySelector('.finale-content');
+    
+    if (!finaleContent) return;
+    
+    // Add secret trigger area (the heart decoration)
+    const heartIcon = finaleContent.querySelector('.heart-decoration') || 
+                      finaleContent.querySelector('.finale-title');
+    
+    if (!heartIcon) return;
+    
+    heartIcon.style.cursor = 'pointer';
+    
+    heartIcon.addEventListener('click', (e) => {
+        e.stopPropagation();
+        clickCount++;
+        
+        // Haptic feedback
+        if (window.Haptic) window.Haptic.light();
+        
+        // Visual feedback
+        heartIcon.style.transform = `scale(${1 + clickCount * 0.05})`;
+        
+        if (clickCount >= requiredClicks) {
+            showSecretMessage();
+            clickCount = 0;
+            heartIcon.style.transform = '';
+            
+            // Unlock achievement
+            if (window.achievements) {
+                window.achievements.unlock('secret_finder');
+            }
+        }
+        
+        // Reset after 2 seconds of no clicks
+        clearTimeout(heartIcon.secretTimeout);
+        heartIcon.secretTimeout = setTimeout(() => {
+            clickCount = 0;
+            heartIcon.style.transform = '';
+        }, 2000);
+    });
+}
+
+function showSecretMessage() {
+    // Check if already showing
+    if (document.querySelector('.secret-message-overlay')) return;
+    
+    const overlay = document.createElement('div');
+    overlay.className = 'secret-message-overlay';
+    overlay.innerHTML = `
+        <div class="secret-message-box glass-card scale-pop">
+            <div class="secret-icon">🔮</div>
+            <h3>Bí Mật Nhỏ Của Anh</h3>
+            <p class="secret-text">
+                "Em à, mỗi ngày trôi qua anh đều cảm thấy may mắn vì có em bên cạnh.
+                Đây là bí mật nhỏ mà anh giấu ở đây — chỉ em mới tìm thấy được.
+                Anh yêu em nhiều lắm! 💕"
+            </p>
+            <button class="secret-close glow-btn">Đóng 💝</button>
+        </div>
+    `;
+    
+    // Styles
+    overlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        padding: 20px;
+    `;
+    
+    const box = overlay.querySelector('.secret-message-box');
+    box.style.cssText = `
+        max-width: 400px;
+        padding: 30px;
+        text-align: center;
+        color: white;
+    `;
+    
+    overlay.querySelector('.secret-icon').style.cssText = `
+        font-size: 50px;
+        margin-bottom: 15px;
+        animation: float 2s ease-in-out infinite;
+    `;
+    
+    overlay.querySelector('h3').style.cssText = `
+        color: #ff69b4;
+        margin-bottom: 15px;
+        font-size: 1.5rem;
+    `;
+    
+    overlay.querySelector('.secret-text').style.cssText = `
+        line-height: 1.8;
+        margin-bottom: 20px;
+        font-style: italic;
+    `;
+    
+    document.body.appendChild(overlay);
+    
+    // Sound and haptic
+    if (window.sfx) window.sfx.play('sparkle');
+    if (window.Haptic) window.Haptic.success();
+    if (window.Confetti) window.Confetti.burst(window.innerWidth / 2, window.innerHeight / 2, 40);
+    
+    // Close button
+    overlay.querySelector('.secret-close').addEventListener('click', () => {
+        overlay.style.opacity = '0';
+        overlay.style.transition = 'opacity 0.3s ease';
+        setTimeout(() => overlay.remove(), 300);
+    });
+    
+    // Click outside to close
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+            overlay.style.opacity = '0';
+            overlay.style.transition = 'opacity 0.3s ease';
+            setTimeout(() => overlay.remove(), 300);
+        }
+    });
 }

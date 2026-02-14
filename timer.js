@@ -38,6 +38,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Setup music
     setupMusic();
+    
+    // Initialize new features
+    initLoveQuote();
+    initValentineCountdown();
+    
+    // Unlock time_keeper achievement
+    if (window.achievements) {
+        window.achievements.unlock('time_keeper');
+    }
 });
 
 // ==================== 3D STARFIELD BACKGROUND ====================
@@ -199,26 +208,26 @@ function createShootingStars(container) {
     // Use object pool for better performance
     if (window.PerfUtils && window.PerfUtils.ShootingStarPool) {
         const pool = new window.PerfUtils.ShootingStarPool(container, 8);
-        
+
         setTimeout(() => {
             const sizeRoll = Math.random();
             const size = sizeRoll < 0.25 ? 'small' : sizeRoll > 0.85 ? 'large' : 'normal';
             pool.acquire(size);
         }, 1000);
-        
+
         setInterval(() => {
             const sizeRoll = Math.random();
             const size = sizeRoll < 0.25 ? 'small' : sizeRoll > 0.85 ? 'large' : 'normal';
             pool.acquire(size);
-            
+
             if (Math.random() > 0.8) {
                 setTimeout(() => pool.acquire('small'), 300);
             }
         }, 2500);
-        
+
         return;
     }
-    
+
     // Fallback
     function addShootingStar() {
         const shootingStar = document.createElement('div');
@@ -483,13 +492,13 @@ function createHeartExplosion(x, y) {
         const heart = document.createElement('span');
         heart.className = 'explosion-heart';
         heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-        
+
         // Random direction
         const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.5;
         const distance = 50 + Math.random() * 100;
         const tx = Math.cos(angle) * distance;
         const ty = Math.sin(angle) * distance - 50; // Bias upward
-        
+
         heart.style.cssText = `
             position: fixed;
             left: ${x}px;
@@ -501,7 +510,7 @@ function createHeartExplosion(x, y) {
             --ty: ${ty}px;
             animation: heartExplode 1s ease-out forwards;
         `;
-        
+
         document.body.appendChild(heart);
         setTimeout(() => heart.remove(), 1000);
     }
@@ -510,11 +519,11 @@ function createHeartExplosion(x, y) {
 // ==================== STAT CARDS INTERACTIONS ====================
 function setupStatCardInteractions() {
     const statCards = document.querySelectorAll('.stat-card');
-    
+
     statCards.forEach((card, index) => {
         card.style.cursor = 'pointer';
-        
-        switch(index) {
+
+        switch (index) {
             case 0: // Messages - Show random love note
                 setupMessagesCard(card);
                 break;
@@ -537,7 +546,7 @@ function setupMessagesCard(card) {
         e.stopPropagation();
         const message = loveMessages[Math.floor(Math.random() * loveMessages.length)];
         showToast(card, message);
-        
+
         // Bounce animation
         card.style.animation = 'none';
         card.offsetHeight; // Trigger reflow
@@ -549,11 +558,11 @@ function showToast(card, message) {
     // Remove existing toast
     const existingToast = document.querySelector('.love-toast');
     if (existingToast) existingToast.remove();
-    
+
     const toast = document.createElement('div');
     toast.className = 'love-toast';
     toast.textContent = message;
-    
+
     const rect = card.getBoundingClientRect();
     toast.style.cssText = `
         position: fixed;
@@ -574,7 +583,7 @@ function showToast(card, message) {
         max-width: 280px;
         text-align: center;
     `;
-    
+
     document.body.appendChild(toast);
     setTimeout(() => toast.remove(), 2500);
 }
@@ -584,38 +593,38 @@ function setupSulkingCard(card) {
     const icon = card.querySelector('i');
     const label = card.querySelector('.stat-label');
     const numberEl = card.querySelector('.stat-number');
-    
+
     // Add shake on hover
     card.addEventListener('mouseenter', () => {
         if (!card.classList.contains('happy')) {
             icon.classList.add('shake-angry');
         }
     });
-    
+
     card.addEventListener('mouseleave', () => {
         icon.classList.remove('shake-angry');
     });
-    
+
     card.addEventListener('click', (e) => {
         e.stopPropagation();
-        
+
         if (card.classList.contains('happy')) return;
-        
+
         sulkClickCount++;
-        
+
         // Visual feedback
         card.style.animation = 'none';
         card.offsetHeight;
         card.style.animation = 'cardShake 0.3s ease';
-        
+
         // Show progress
         if (numberEl) {
             numberEl.textContent = `${5 - sulkClickCount}`;
         }
-        
+
         // Clear existing timeout
         if (sulkTimeout) clearTimeout(sulkTimeout);
-        
+
         // Check win condition
         if (sulkClickCount >= 5) {
             // Success! Make happy
@@ -624,11 +633,11 @@ function setupSulkingCard(card) {
             icon.classList.remove('shake-angry');
             if (label) label.textContent = 'Hết dỗi gòy ❤️';
             if (numberEl) numberEl.textContent = '💕';
-            
+
             // Celebration effect
             const rect = card.getBoundingClientRect();
             createHeartExplosion(rect.left + rect.width / 2, rect.top + rect.height / 2);
-            
+
             // Reset after 4 seconds
             setTimeout(() => {
                 card.classList.remove('happy');
@@ -651,26 +660,26 @@ function setupSulkingCard(card) {
 function setupMilkTeaCard(card) {
     const icon = card.querySelector('i');
     let isFilling = false;
-    
+
     card.addEventListener('click', (e) => {
         e.stopPropagation();
-        
+
         if (isFilling) return;
         isFilling = true;
-        
+
         // Show random drink message
         const message = drinkMessages[Math.floor(Math.random() * drinkMessages.length)];
         showToast(card, message);
-        
+
         // Add fill effect
         card.classList.add('filling');
         icon.style.animation = 'teaFill 1.5s ease forwards';
-        
+
         // Create bubble effects
         for (let i = 0; i < 5; i++) {
             setTimeout(() => createBubble(card), i * 200);
         }
-        
+
         // Reset after animation
         setTimeout(() => {
             card.classList.remove('filling');
@@ -684,7 +693,7 @@ function createBubble(card) {
     const bubble = document.createElement('span');
     bubble.className = 'tea-bubble';
     bubble.textContent = '🧋';
-    
+
     const rect = card.getBoundingClientRect();
     bubble.style.cssText = `
         position: fixed;
@@ -695,7 +704,7 @@ function createBubble(card) {
         z-index: 9999;
         animation: bubbleFloat 1s ease-out forwards;
     `;
-    
+
     document.body.appendChild(bubble);
     setTimeout(() => bubble.remove(), 1000);
 }
@@ -704,10 +713,10 @@ function createBubble(card) {
 function setupPhotosCard(card) {
     card.addEventListener('click', (e) => {
         e.stopPropagation();
-        
+
         // Show photo message
         showToast(card, photoMessage);
-        
+
         // Sparkle effect
         const rect = card.getBoundingClientRect();
         for (let i = 0; i < 8; i++) {
@@ -718,7 +727,7 @@ function setupPhotosCard(card) {
                 );
             }, i * 50);
         }
-        
+
         // Bounce
         card.style.animation = 'none';
         card.offsetHeight;
@@ -738,7 +747,27 @@ function createSparkle(x, y) {
         z-index: 9999;
         animation: sparkleEffect 0.8s ease-out forwards;
     `;
-    
+
     document.body.appendChild(sparkle);
     setTimeout(() => sparkle.remove(), 800);
+}
+
+// ==================== LOVE QUOTE OF THE DAY ====================
+function initLoveQuote() {
+    const container = document.getElementById('love-quote-container');
+    if (!container || !window.LoveQuotes) return;
+    
+    const quoteEl = window.LoveQuotes.createElement();
+    container.appendChild(quoteEl);
+}
+
+// ==================== VALENTINE COUNTDOWN ====================
+function initValentineCountdown() {
+    const container = document.getElementById('valentine-countdown');
+    if (!container || !window.CountdownTimer) return;
+    
+    const nextValentine = window.CountdownTimer.getNextValentine();
+    const countdown = new window.CountdownTimer(nextValentine);
+    const countdownEl = countdown.createElement();
+    container.appendChild(countdownEl);
 }

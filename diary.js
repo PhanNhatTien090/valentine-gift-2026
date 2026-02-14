@@ -147,29 +147,29 @@ function createShootingStars(container) {
     // Use object pool for better performance
     if (window.PerfUtils && window.PerfUtils.ShootingStarPool) {
         const pool = new window.PerfUtils.ShootingStarPool(container, 8);
-        
+
         // Add first shooting star
         setTimeout(() => {
             const sizeRoll = Math.random();
             const size = sizeRoll < 0.25 ? 'small' : sizeRoll > 0.85 ? 'large' : 'normal';
             pool.acquire(size);
         }, 1000);
-        
+
         // Add shooting stars periodically (longer interval for performance)
         setInterval(() => {
             const sizeRoll = Math.random();
             const size = sizeRoll < 0.25 ? 'small' : sizeRoll > 0.85 ? 'large' : 'normal';
             pool.acquire(size);
-            
+
             // Sometimes add second for shower effect
             if (Math.random() > 0.8) {
                 setTimeout(() => pool.acquire('small'), 300);
             }
         }, 2500); // Slightly longer interval
-        
+
         return;
     }
-    
+
     // Fallback to original implementation
     function addShootingStar() {
         const shootingStar = document.createElement('div');
@@ -306,6 +306,11 @@ function updateLeftPage() {
 function flipToNextPage() {
     if (currentPage >= totalPages - 1) {
         showEndToast();
+        
+        // Unlock achievement for reading all pages
+        if (window.achievements) {
+            window.achievements.unlock('page_turner');
+        }
         return;
     }
 
@@ -319,6 +324,10 @@ function flipToNextPage() {
         currentPage++;
         updatePageIndicator();
         updateBookCentering();
+        
+        // Sound effect and haptic feedback
+        if (window.sfx) window.sfx.play('pageFlip');
+        if (window.Haptic) window.Haptic.medium();
     }
 
     setTimeout(() => {
@@ -368,6 +377,11 @@ function flipToPrevPage() {
         currentPage--;
         updatePageIndicator();
         updateBookCentering();
+        
+        // Sound effect and haptic feedback
+        if (window.sfx) window.sfx.play('pageFlip');
+        if (window.Haptic) window.Haptic.medium();
+    }
     }
 
     setTimeout(() => {

@@ -341,7 +341,7 @@ function init3DPhotoSphere() {
     let velocity = { x: 0, y: 0 };
     let hoveredCard = null;
     let isPageVisible = true;
-    
+
     // Page visibility detection
     document.addEventListener('visibilitychange', () => {
         isPageVisible = !document.hidden;
@@ -350,7 +350,7 @@ function init3DPhotoSphere() {
     // Animation with visibility check
     function animate() {
         requestAnimationFrame(animate);
-        
+
         // Skip rendering when page is not visible
         if (!isPageVisible) return;
 
@@ -481,6 +481,15 @@ function init3DPhotoSphere() {
 
             if (hits.length > 0 && window.openSphereLightbox) {
                 window.openSphereLightbox(hits[0].object.userData.index);
+                
+                // Create like heart animation
+                if (window.createLikeHeart) {
+                    window.createLikeHeart(pos.x, pos.y);
+                }
+                
+                // Sound and haptic
+                if (window.sfx) window.sfx.play('pop');
+                if (window.Haptic) window.Haptic.light();
             }
         }
     }
@@ -565,6 +574,15 @@ function initLightbox() {
         lightboxCaption.textContent = `${currentIndex + 1} / ${images.length}`;
         lightbox.classList.add('active');
         document.body.style.overflow = 'hidden';
+        
+        // Track photo views for achievement
+        let viewCount = parseInt(sessionStorage.getItem('photoViews') || '0');
+        viewCount++;
+        sessionStorage.setItem('photoViews', viewCount.toString());
+        
+        if (viewCount >= 10 && window.achievements) {
+            window.achievements.unlock('photo_lover');
+        }
     };
 
     function close() {

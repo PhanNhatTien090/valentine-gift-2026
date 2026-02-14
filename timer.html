@@ -25,6 +25,7 @@
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="performance.css">
+    <link rel="stylesheet" href="enhancements.css">
 </head>
 
 <body class="page-timer">
@@ -113,6 +114,18 @@
                 </div>
             </div>
 
+            <!-- Love Quote of the Day -->
+            <div id="love-quote-container" class="love-quote-section"></div>
+
+            <!-- Countdown to Next Valentine -->
+            <div class="next-event-section">
+                <h3 class="next-event-title">
+                    <i class="fas fa-heart"></i>
+                    Đếm ngược Valentine tiếp theo
+                </h3>
+                <div id="valentine-countdown"></div>
+            </div>
+
             <!-- Navigation -->
             <div class="timer-nav">
                 <a href="diary.html" class="nav-link nav-prev">
@@ -143,6 +156,9 @@
     </audio>
 
     <script src="performance.js"></script>
+    <script src="haptic.js"></script>
+    <script src="sound-effects.js"></script>
+    <script src="features.js"></script>
     <script src="timer.js"></script>
 </body>
 
