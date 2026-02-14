@@ -1,0 +1,17 @@
+{
+    "name": "Valentine Gift 2026 💕",
+    "short_name": "Valentine 💕",
+    "description": "Món quà Valentine dành riêng cho em yêu",
+    "start_url": "/index.html",
+    "display": "fullscreen",
+    "orientation": "landscape",
+    "background_color": "#1a0a1a",
+    "theme_color": "#ff1493",
+    "icons": [
+        {
+            "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💕</text></svg>",
+            "sizes": "any",
+            "type": "image/svg+xml"
+        }
+    ]
+}
