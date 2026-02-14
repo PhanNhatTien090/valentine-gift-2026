@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>💝 Bên Nhau Được... 💝</title>
+
+    <!-- Google Fonts - Mali -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mali:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="page-timer">
+    <!-- ==================== ROTATE DEVICE OVERLAY ==================== -->
+    <div id="rotate-device-overlay">
+        <span class="rotate-decoration">💕</span>
+        <span class="rotate-decoration">✨</span>
+        <span class="rotate-decoration">🌸</span>
+        <span class="rotate-decoration">💖</span>
+
+        <div class="rotate-phone-icon">
+            <i class="fas fa-mobile-alt phone-device"></i>
+            <span class="rotate-arrows">↻</span>
+        </div>
+
+        <p class="rotate-message">
+            <span class="highlight">Xoay ngang điện thoại nha!</span>
+            Để xem thời gian yêu đẹp hơn nè!
+            <span class="emoji">🔄</span>
+        </p>
+    </div>
+
+    <!-- 3D Starfield Background -->
+    <div class="starfield-3d" id="starfield-3d"></div>
+
+    <!-- ==================== LOVE TIMER PAGE ==================== -->
+    <section id="love-timer" class="love-timer-section page-section visible">
+        <!-- Glassmorphism Container -->
+        <div class="timer-container">
+            <!-- Header -->
+            <div class="timer-header">
+                <div class="timer-heart-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h2 class="timer-title">Bên nhau được...</h2>
+            </div>
+
+            <!-- Main Timer Display -->
+            <div class="timer-display">
+                <div class="timer-unit">
+                    <span class="timer-value" id="timer-days">0</span>
+                    <span class="timer-label">Ngày</span>
+                </div>
+                <div class="timer-separator">:</div>
+                <div class="timer-unit">
+                    <span class="timer-value" id="timer-hours">00</span>
+                    <span class="timer-label">Giờ</span>
+                </div>
+                <div class="timer-separator">:</div>
+                <div class="timer-unit">
+                    <span class="timer-value" id="timer-minutes">00</span>
+                    <span class="timer-label">Phút</span>
+                </div>
+                <div class="timer-separator">:</div>
+                <div class="timer-unit">
+                    <span class="timer-value" id="timer-seconds">00</span>
+                    <span class="timer-label">Giây</span>
+                </div>
+            </div>
+
+            <!-- Fun Stats Grid -->
+            <div class="fun-stats-grid">
+                <div class="stat-card" data-target="9999">
+                    <i class="fas fa-moon"></i>
+                    <span class="stat-number" id="stat-messages">0</span>
+                    <span class="stat-suffix">+</span>
+                    <span class="stat-label">Lời chúc ngủ ngon</span>
+                </div>
+                <div class="stat-card" data-target="infinity">
+                    <i class="fas fa-face-angry"></i>
+                    <span class="stat-number" id="stat-sulk">∞</span>
+                    <span class="stat-suffix"></span>
+                    <span class="stat-label">Số lần dỗi</span>
+                </div>
+                <div class="stat-card" data-target="500">
+                    <i class="fas fa-mug-hot"></i>
+                    <span class="stat-number" id="stat-boba">0</span>
+                    <span class="stat-suffix">+</span>
+                    <span class="stat-label">Ly trà sữa</span>
+                </div>
+                <div class="stat-card" data-target="15">
+                    <i class="fas fa-images"></i>
+                    <span class="stat-number" id="stat-photos">0</span>
+                    <span class="stat-suffix">GB</span>
+                    <span class="stat-label">Dung lượng ảnh</span>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="timer-nav">
+                <a href="diary.html" class="nav-link nav-prev">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Xem lại nhật ký</span>
+                </a>
+                <a href="gallery.html" class="nav-link nav-next">
+                    <span>Xem kỷ niệm</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Back to home button -->
+    <a href="index.html" class="back-home-btn" title="Về trang chủ">
+        <i class="fas fa-home"></i>
+    </a>
+
+    <!-- Music Toggle -->
+    <button id="music-toggle" class="music-toggle visible" title="Bật/Tắt nhạc">
+        <i class="fas fa-music"></i>
+    </button>
+
+    <!-- Background Music -->
+    <audio id="bg-music" loop>
+        <source src="assets/music/2.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="timer.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>💕 Lời Yêu Thương 💕</title>
+
+    <!-- Google Fonts - Mali -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mali:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="page-finale">
+    <!-- ==================== ROTATE DEVICE OVERLAY ==================== -->
+    <div id="rotate-device-overlay">
+        <span class="rotate-decoration">💕</span>
+        <span class="rotate-decoration">✨</span>
+        <span class="rotate-decoration">🌸</span>
+        <span class="rotate-decoration">💖</span>
+
+        <div class="rotate-phone-icon">
+            <i class="fas fa-mobile-alt phone-device"></i>
+            <span class="rotate-arrows">↻</span>
+        </div>
+
+        <p class="rotate-message">
+            <span class="highlight">Xoay ngang điện thoại nha!</span>
+            Để xem lời yêu thương nè!
+            <span class="emoji">🔄</span>
+        </p>
+    </div>
+
+    <!-- 3D Starfield Background -->
+    <div class="starfield-3d" id="starfield-3d"></div>
+
+    <!-- Sparkles Effect -->
+    <div class="sparkles-container" id="sparkles-container"></div>
+
+    <!-- ==================== FINAL MESSAGE PAGE ==================== -->
+    <section id="finale" class="finale-section page-section visible">
+        <!-- Animated Heart -->
+        <div class="finale-heart-container">
+            <div class="finale-heart">
+                <i class="fas fa-heart"></i>
+            </div>
+            <div class="heart-rings">
+                <div class="ring ring-1"></div>
+                <div class="ring ring-2"></div>
+                <div class="ring ring-3"></div>
+            </div>
+        </div>
+
+        <!-- Message Card -->
+        <div class="finale-card">
+            <div class="card-decoration top-left">💕</div>
+            <div class="card-decoration top-right">💕</div>
+
+            <h2 class="finale-title">Gửi Em Yêu</h2>
+
+            <div class="finale-message">
+                <p class="message-line" style="--delay: 0">
+                    <span class="highlight">7 năm</span> qua là khoảng thời gian tuyệt vời nhất...
+                </p>
+                <p class="message-line" style="--delay: 1">
+                    Từ ngày <span class="highlight">22/10/2021</span> đến bây giờ,
+                </p>
+                <p class="message-line" style="--delay: 2">
+                    Mỗi ngày bên em đều là một <span class="highlight">món quà</span> 🎁
+                </p>
+                <p class="message-line" style="--delay: 3">
+                    Cảm ơn em đã luôn <span class="highlight">yêu thương</span>,
+                </p>
+                <p class="message-line" style="--delay: 4">
+                    <span class="highlight">chăm sóc</span> và <span class="highlight">ở bên</span> anh 💗
+                </p>
+            </div>
+
+            <div class="finale-signature">
+                <p class="signature-text">Yêu em mãi mãi</p>
+                <div class="signature-hearts">
+                    <span>💖</span>
+                    <span>💝</span>
+                    <span>💕</span>
+                </div>
+            </div>
+
+            <div class="card-decoration bottom-left">💕</div>
+            <div class="card-decoration bottom-right">💕</div>
+        </div>
+
+        <!-- Promise Section -->
+        <div class="promise-section">
+            <h3 class="promise-title">
+                <i class="fas fa-ring"></i>
+                Chúc Em Ngày 14/2 thật hạnh phúc
+            </h3>
+            <ul class="promise-list">
+                <li class="promise-item">
+                    <i class="fas fa-check-heart"></i>
+                    "Mong món quà nhỏ này sẽ làm bae vui! 🎁"
+                </li>
+            </ul>
+        </div>
+
+        <!-- Navigation -->
+        <div class="finale-nav">
+            <a href="gallery.html" class="nav-link nav-prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>Quay lại</span>
+            </a>
+            <a href="index.html" class="nav-link nav-home">
+                <i class="fas fa-home"></i>
+                <span>Trang đầu</span>
+            </a>
+        </div>
+
+        <!-- Replay Button -->
+        <button class="replay-btn" id="replay-btn">
+            <i class="fas fa-redo"></i>
+            Xem lại từ đầu
+        </button>
+    </section>
+
+    <!-- Confetti Canvas -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Background Music -->
+    <audio id="bg-music" loop>
+        <source src="assets/music/final.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Music Toggle Button -->
+    <button class="music-toggle" id="music-toggle" title="Bật/Tắt nhạc">
+        <i class="fas fa-music"></i>
+    </button>
+
+    <script src="finale.js"></script>
+</body>
+
+</html>

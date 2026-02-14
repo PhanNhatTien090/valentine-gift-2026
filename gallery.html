@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>💕 Khoảnh Khắc Của Chúng Ta 💕</title>
+
+    <!-- Google Fonts - Mali -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mali:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="page-gallery">
+    <!-- ==================== ROTATE DEVICE OVERLAY ==================== -->
+    <div id="rotate-device-overlay">
+        <span class="rotate-decoration">💕</span>
+        <span class="rotate-decoration">✨</span>
+        <span class="rotate-decoration">🌸</span>
+        <span class="rotate-decoration">💖</span>
+
+        <div class="rotate-phone-icon">
+            <i class="fas fa-mobile-alt phone-device"></i>
+            <span class="rotate-arrows">↻</span>
+        </div>
+
+        <p class="rotate-message">
+            <span class="highlight">Xoay ngang điện thoại nha!</span>
+            Để xem ảnh kỷ niệm đẹp hơn nè!
+            <span class="emoji">🔄</span>
+        </p>
+    </div>
+
+    <!-- 3D Starfield Background -->
+    <div class="starfield-3d" id="starfield-3d"></div>
+
+    <!-- ==================== 3D HEART GALLERY ==================== -->
+    <section id="heart-gallery" class="heart-gallery-section page-section visible">
+        <!-- 3D Sphere Container -->
+        <div class="sphere-3d-wrapper" id="sphere-wrapper">
+            <canvas id="sphere-canvas"></canvas>
+        </div>
+
+        <!-- Navigation -->
+        <div class="gallery-nav">
+            <a href="timer.html" class="nav-link nav-prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>Quay lại</span>
+            </a>
+            <a href="finale.html" class="nav-link nav-next">
+                <span>Lời cuối</span>
+                <i class="fas fa-heart"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightbox-close">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="lightbox-content">
+            <img src="" alt="Photo" id="lightbox-img">
+            <p class="lightbox-caption" id="lightbox-caption"></p>
+        </div>
+        <button class="lightbox-nav lightbox-prev" id="lightbox-prev">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="lightbox-nav lightbox-next" id="lightbox-next">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+
+    <!-- Background Music -->
+    <audio id="bg-music" loop>
+        <source src="assets/music/3.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Music Toggle Button -->
+    <button class="music-toggle" id="music-toggle" title="Bật/Tắt nhạc">
+        <i class="fas fa-music"></i>
+    </button>
+
+    <script src="gallery.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>💝 Nhật Ký Tình Yêu 💝</title>
+
+    <!-- Google Fonts - Mali + Dancing Script for handwritten feel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Mali:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="page-diary">
+    <!-- ==================== ROTATE DEVICE OVERLAY ==================== -->
+    <div id="rotate-device-overlay">
+        <span class="rotate-decoration">💕</span>
+        <span class="rotate-decoration">✨</span>
+        <span class="rotate-decoration">🌸</span>
+        <span class="rotate-decoration">💖</span>
+
+        <div class="rotate-phone-icon">
+            <i class="fas fa-mobile-alt phone-device"></i>
+            <span class="rotate-arrows">↻</span>
+        </div>
+
+        <p class="rotate-message">
+            <span class="highlight">Xoay ngang điện thoại nha!</span>
+            Để xem nhật ký đẹp hơn á You ơi!
+            <span class="emoji">🔄</span>
+        </p>
+    </div>
+
+    <!-- 3D Starfield Background -->
+    <div class="starfield-3d" id="starfield-3d"></div>
+
+    <!-- ==================== PHOTOBOOK PAGE ==================== -->
+    <section id="section-diary" class="section section-diary page-section">
+        <!-- The 3D Photobook Spread -->
+        <div class="photobook-wrapper" id="photobook-wrapper">
+
+            <!-- LEFT PAGE: Text content (changes based on current page) -->
+            <div class="left-page" id="left-page">
+                <div class="page-lines"></div>
+
+                <!-- Content for each page - only one visible at a time -->
+                <div class="left-content" data-for-page="1">
+                    <div class="page-inner-design"></div>
+                </div>
+
+                <div class="left-content" data-for-page="2">
+                    <div class="corner-note top-left">bae ngủ ngon ♡</div>
+                    <p class="handwritten-text">
+                        "Hồi đầu yêu nhau ngại ngùng ghê ha.<br>
+                        Trong sáng, dễ thương xỉu..."
+                    </p>
+                    <div class="corner-note bottom-right">yêu baeeee~</div>
+                    <div class="corner-note top-right">ahihi</div>
+                </div>
+
+                <div class="left-content" data-for-page="3">
+                    <div class="corner-note top-right">nhớ hông? 🥺</div>
+                    <p class="handwritten-text">
+                        "Sóng gió hồi đó...<br>
+                        Hai đứa mình đã vượt qua bao áp lực."
+                    </p>
+                    <div class="corner-note bottom-left">nhưng mình vẫn ở đây ♡</div>
+                    <div class="corner-note top-left">strong ♡</div>
+                </div>
+
+                <div class="left-content" data-for-page="4">
+                    <div class="corner-note top-left">anh yêu em lắm ♡</div>
+                    <p class="handwritten-text">
+                        "Nhưng tình yêu của mình quá lớn.<br>
+                        Sóng gió không cản được!"
+                    </p>
+                    <div class="corner-note bottom-right">mãi bên nhau nha~</div>
+                    <div class="corner-note top-right">we did it!</div>
+                </div>
+
+                <div class="left-content" data-for-page="5">
+                    <div class="corner-note top-right">em nhớ nụ hôn đầu tiên không? 💋</div>
+                    <p class="handwritten-text">
+                        "Thanh xuân có em chính là phép màu.<br>
+                        Biết ơn vì đã gặp nhau..."
+                    </p>
+                    <div class="corner-note bottom-left">thanh xuân là em ♡</div>
+                    <div class="corner-note top-left">best time~</div>
+                </div>
+
+                <div class="left-content" data-for-page="6">
+                    <div class="corner-note top-left">hiểu không nào~</div>
+                    <p class="handwritten-text big-text">
+                        "Lắm lúc anh nghĩ<br>mình lời ghê chứ..."
+                    </p>
+                    <p class="handwritten-text big-text" style="color: #e91e63;">
+                        "Yêu một cô<br>mà được tận mấy cô..."
+                    </p>
+                    <p class="handwritten-text warning-text">
+                        Khoan chửi anh nha! Đọc tiếp i →
+                    </p>
+                    <div class="corner-note bottom-right">đọc tiếp nha ♡</div>
+                    <div class="corner-note top-right">còn mấy cô chỉ có anh biết thôi nhé...</div>
+                </div>
+
+                <div class="left-content" data-for-page="7">
+                    <div class="corner-note top-left">cute thế 🥺</div>
+                    <p class="handwritten-text">
+                        "Cô này thì deth không chịu nổi...<br>
+                        awww 🥺"
+                    </p>
+                    <div class="corner-note bottom-right">muốn cắn ♡</div>
+                    <div class="corner-note top-right">luv u~</div>
+                </div>
+
+                <div class="left-content" data-for-page="8">
+                    <div class="corner-note top-right">hoa này là gì mà đẹp thế nhỉ? 🌸</div>
+                    <p class="handwritten-text">
+                        "Cô này thì cool ngầu kinh khủng.<br>
+                        Hâm mộ vá diii!"
+                    </p>
+                    <div class="corner-note bottom-left">là bạn gái anh đó ♡</div>
+                    <div class="corner-note top-left">so cool~</div>
+                </div>
+
+                <div class="left-content" data-for-page="9">
+                    <div class="corner-note top-left">công chúa của anh 👑</div>
+                    <p class="handwritten-text">
+                        "Cô tiểu thư này<br>
+                        từ trong truyện bước ra à..."
+                    </p>
+                    <div class="corner-note bottom-right">xinh quá trời ♡</div>
+                    <div class="corner-note top-right">ahihi</div>
+                </div>
+
+                <div class="left-content" data-for-page="10">
+                    <div class="corner-note top-right">top người phìn nhứt... 🤔</div>
+                    <p class="handwritten-text">
+                        "Cô nàng siu ngố:<br>
+                        lắm lúc cũm khùm dữ lắm kkkk"
+                    </p>
+                    <div class="corner-note bottom-left">...ko phải em đâu ♡</div>
+                    <div class="corner-note top-left">kkkk</div>
+                </div>
+
+                <div class="left-content" data-for-page="11">
+                    <div class="corner-note top-left">lúc nào cũng đẹp ♡</div>
+                    <p class="handwritten-text">
+                        "Em của ngày xưa<br>và bây giờ nè :)))"
+                    </p>
+                    <div class="corner-note bottom-right">lúc nào cũng xink~</div>
+                    <div class="corner-note top-right">ahihi</div>
+                </div>
+
+                <div class="left-content" data-for-page="12">
+                    <div class="corner-note top-right">my angel ♡</div>
+                    <p class="handwritten-text">
+                        "Dù như nào thì cũng là<br>
+                        em bé bỏng của anh thoi.<br>
+                        Cưn nhắm! 💕"
+                    </p>
+                    <div class="corner-note bottom-left">luvv~</div>
+                    <div class="corner-note top-left">luv u so much</div>
+                </div>
+            </div>
+
+            <!-- RIGHT PAGE: The actual flipbook with images -->
+            <div class="photobook" id="photobook">
+
+                <!-- ==================== PAGE 1: COVER ==================== -->
+                <div class="book-page" id="page-1">
+                    <!-- FRONT: Red Cover -->
+                    <div class="page-front page-cover">
+                        <div class="cover-decoration">
+                            <div class="cover-doodles">✿ ✿ ✿</div>
+                            <div class="cover-heart-drawn">
+                                <svg viewBox="0 0 100 100" class="hand-drawn-heart">
+                                    <path
+                                        d="M50 88 C20 60, 5 40, 20 25 C35 10, 50 20, 50 35 C50 20, 65 10, 80 25 C95 40, 80 60, 50 88"
+                                        fill="none" stroke="#fff5f5" stroke-width="3" stroke-linecap="round" />
+                                </svg>
+                            </div>
+                            <h1 class="cover-title">Chuyện<br>Tụi Mình</h1>
+                            <div class="cover-subtitle">♡ Nhật ký yêu thương ♡</div>
+                            <div class="cover-tape cover-tape-1"></div>
+                            <div class="cover-tape cover-tape-2"></div>
+                            <div class="cover-sticker">💕</div>
+                        </div>
+                    </div>
+                    <!-- BACK: Blank paper -->
+                    <div class="page-back page-paper">
+                        <div class="page-lines"></div>
+                    </div>
+                </div>
+
+                <!-- ==================== PAGE 2: THE BEGINNING ==================== -->
+                <div class="book-page" id="page-2">
+                    <!-- FRONT: Photo "Ngày You gật đầu" -->
+                    <div class="page-front page-paper">
+                        <div class="page-lines"></div>
+                        <div class="page-content-single">
+                            <div class="page-date-stamp">
+                                <i class="fas fa-calendar-heart"></i>
+                                22/10/2019
+                            </div>
+                            <div class="media-item polaroid photo-center">
+                                <div class="photo-tape"></div>
+                                <div class="media-content">
+                                    <img src="assets/images/p2%201%20h%C3%ACnh/z7530297601098_8bb26660f70d80170a3563d06219ab10.jpg"
+                                        alt="Ngày đầu tiên"
+                                        onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect fill=%22%23f5efe6%22 width=%22200%22 height=%22200%22/><text x=%22100%22 y=%22110%22 text-anchor=%22middle%22 font-size=%2260%22>💑</text></svg>'">
+                                </div>
+                                <div class="media-caption">Ngày You gật đầu ♡</div>
+                            </div>
+                            <p class="handwritten-text">
+                                <span class="text-deco">✨</span>
+                                "Ngày You gật đầu.<br>Tim Tui đập bịch bịch!"
+                                <span class="text-deco">✨</span>
+                            </p>
+                            <div class="corner-note bottom-right">hồi hộp ghê~</div>
+                        </div>
+                    </div>
+                    <!-- BACK: TEXT for "Trong sáng" -->
+                    <div class="page-back page-paper">
+                        <div class="page-lines"></div>
+                        <div class="story-text-back">
+                            <div class="corner-note top-left">hồi đó ngại ghê ♡</div>
+                            <p class="handwritten-text">
+                                "Hồi đầu yêu nhau ngại ngùng ghê ha.<br>
+                                Trong sáng, dễ thương xỉu..."
+                            </p>
+                            <div class="corner-note bottom-right">nhưng vui lắm~</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==================== PAGE 3: INNOCENCE (2 Images + 1 Video) ==================== -->
+                <div class="book-page" id="page-3">
+                    <!-- FRONT: IMAGES + VIDEO for "Trong sáng" -->
+                    <div class="page-front page-paper">
+                        <div class="page-lines"></div>
+                        <div class="media-page">
+                            <div class="media-grid-page grid-3">
+                                <div class="media-item polaroid">
+                                    <div class="photo-tape"></div>
+                                    <div class="media-content">
+                                        <img src="assets/images/p3%202%20h%C3%ACnh%201%20vd/z7530499859357_c89e0e4f46e200c640975431234e0352.jpg"
+                                            alt="Trong sáng 1"
+                                            onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect fill=%22%23f5efe6%22 width=%22200%22 height=%22200%22/><text x=%22100%22 y=%22110%22 text-anchor=%22middle%22 font-size=%2260%22>🥰</text></svg>'">
+                                    </div>
+                                </div>
+                                <div class="media-item polaroid">
+                                    <div class="photo-tape tape-style-2"></div>
+                                    <div class="media-content">
+                                        <img src="assets/images/p3%202%20h%C3%ACnh%201%20vd/z7530503070915_1b67caf523d62a4381b220d7da936bc9.jpg"
+                                            alt="Trong sáng 2"
+                                            onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect fill=%22%23f5efe6%22 width=%22200%22 height=%22200%22/><text x=%22100%22 y=%22110%22 text-anchor=%22middle%22 font-size=%2260%22>😊</text></svg>'">
+                                    </div>
+                                </div>
+                                <div class="media-item polaroid video-item">
+                                    <div class="photo-tape tape-style-3"></div>
+                                    <div class="media-content">
+                                        <video playsinline muted loop autoplay>
+                                            <source src="assets/images/p3%202%20h%C3%ACnh%201%20vd/7530412227710.mp4"
+                                                type="video/mp4">
+                                        </video>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- BACK: TEXT for "Sóng gió" -->
+                    <div class="page-back page-paper">
+                        <div class="page-lines"></div>
+                        <div class="story-text-back">
+                            <div class="corner-note top-right">khó khăn mấy cũng qua ♡</div>
+                            <p class="handwritten-text">
+                                "Sóng gió hồi đó...<br>
+                                Hai đứa mình đã phải chịu bao áp lực."
+                            </p>
+                            <div class="corner-note bottom-left">vì có em ♡</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==================== PAGE 4: STORMS (4 Images + 1 Video) ==================== -->
+                <div class="book-page" id="page-4">
+                    <!-- FRONT: IMAGES + VIDEO for "Sóng gió" -->
+                    <div class="page-front page-paper">
+                        <div class="page-lines"></div>
+                        <div class="media-page">
+                            <div class="media-grid-page grid-5">
+                                <div class="media-item polaroid">
+                                    <div class="photo-tape tape-style-3"></div>
+                                    <div class="media-content">
+                                        <img src="assets/images/p4%204%20h%C3%ACnh%201%20vd/z7530402912271_4af413176a7617c891c2f9dced4b793e.jpg"
+                                            alt="Sóng gió 1"
+                                            onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect fill=%22%23d3d3d3%22 width=%22200%22 height=%22200%22/><text x=%22100%22 y=%22110%22 text-anchor=%22middle%22 font-size=%2260%22>🌧️</text></svg>'">
+                                    </div>
+                                </div>
+                                <div class="media-item polaroid">
+                                    <div class="photo-tape"></div>
+                                    <div class="media-content">
+                                        <img src="assets/images/p4%204%20h%C3%ACnh%201%20vd/z7530408268435_2875f980e2842c4a02029567e90a9d9d.jpg"
+                                            alt="Sóng gió 2"
+                                            onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect fill=%22%23c0c0c0%22 width=%22200%22 height=%22200%22/><text x=%22100%22 y=%22110%22 text-anchor=%22middle%22 font-size=%2260%22>😢</text></svg>'">
+                                    </div>
+                                </div>
+                                <div class="media-item polaroid">
+                                    <div class="photo-tape tape-style-2"></div>
+                                    <div class="media-content">
+                                        <img src="assets/images/p4%204%20h%C3%ACnh%201%20vd/z7530410925594_854da1eea38769e9401433354a5ef389.jpg"
+                                            alt="Sóng gió 3"
+                                            onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect fill=%22%23d3d3d3%22 width=%22200%22 height=%22200%22/><text x=%22100%22 y=%22110%22 text-anchor=%22middle%22 font-size=%2260%22>💪</text></svg>'">
+                                    </div>
+                                </div>
+                                <div class="media-item polaroid">
+                                    <div class="photo-tape tape-style-4"></div>
+                                    <div class="media-content">
+                                        <img src="assets/images/p4%204%20h%C3%ACnh%201%20vd/z7530413707020_d3a3aeead3d4d1670e9d3983ab9a9888.jpg"
+                                            alt="Sóng gió 4"
+                                            onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect fill=%22%23c0c0c0%22 width=%22200%22 height=%22200%22/><text x=%22100%22 y=%22110%22 text-anchor=%22middle%22 font-size=%2260%22>🌈</text></svg>'">
+                                    </div>
+                                </div>
+                                <div class="media-item polaroid video-item">
+                                    <div class="photo-tape"></div>
+                                    <div class="media-content">
+                                        <video playsinline muted loop autoplay>
+                                            <source src="assets/images/p4%204%20h%C3%ACnh%201%20vd/7530483293156.mp4"
+                                                type="video/mp4">
+                                        </video>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- BACK: TEXT for "Vượt qua" -->
+                    <div class="page-back page-paper">
+                        <div class="page-lines"></div>
+                        <div class="story-text-back">
+                            <div class="corner-note top-left">mình giỏi quá ♡</div>
+                            <p class="handwritten-text">
+                                "Nhưng tình yêu của mình quá lớn.<br>
+                                Sóng gió không cản được!"
+                            </p>
+                            <div class="corner-note bottom-right">cố lên nào~</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==================== PAGE 5: OVERCOMING (2 Images + 1 Video) ==================== -->
+                <div class="book-page" id="page-5">
+                    <!-- FRONT: IMAGES + VIDEO for "Vượt qua" -->
+                    <div class="page-front page-paper">
+                        <div class="page-lines"></div>
+                        <div class="media-page">
+                            <div class="media-grid-page grid-3">
+                                <div class="media-item polaroid">
+                                    <div class="photo-tape tape-style-2"></div>
+                                    <div class="media-content">
+                                        <img src="assets/images/p5%202%20h%C3%ACnh%201%20vd/z7530492224919_3e2ccdf958335f7871899ef7818be053.jpg"
+                                            alt="Vượt qua 1"
+                                            onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect fill=%22%23f5efe6%22 width=%22200%22 height=%22200%22/><text x=%22100%22 y=%22110%22 text-anchor=%22middle%22 font-size=%2260%22>🤝</text></svg>'">
+                                    </div>
+                                    <div class="media-caption">Nắm tay nhau!</div>
+                                </div>
+                                <div class="media-item polaroid">
+                                    <div class="photo-tape tape-style-4"></div>
+                                    <div class="media-content">
+                                        <img src="assets/images/p5%202%20h%C3%ACnh%201%20vd/z7530495927237_39759fd19bc2b226f2bb30d2447af485.jpg"
+                                            alt="Vượt qua 2"
+                                            onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect fill=%22%23f5efe6%22 width=%22200%22 height=%22200%22/><text x=%22100%22 y=%22110%22 text-anchor=%22middle%22 font-size=%2260%22>💑</text></svg>'">
+                                    </div>
+                                </div>
+                                <div class="media-item polaroid video-item">
+                                    <div class="photo-tape"></div>
+                                    <div class="media-content">
+                                        <video playsinline muted loop autoplay>
+                                            <source src="assets/images/p5%202%20h%C3%ACnh%201%20vd/7530455762477.mp4"
+                                                type="video/mp4">
+                                        </video>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- BACK: TEXT for "Thanh xuân" -->
+                    <div class="page-back page-paper">
+                        <div class="page-lines"></div>
+                        <div class="story-text-back">
+                            <div class="corner-note top-right">thanh xuân là em ♡</div>
+                            <p class="handwritten-text">
+                                "Thanh xuân có em chính là phép màu.<br>
+                                Biết ơn vì đã gặp nhau..."
+                            </p>
+                            <div class="corner-note bottom-left">may mắn lắm~</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==================== PAGE 6: YOUTH (4 Videos) ==================== -->
+                <div class="book-page" id="page-6">
+                    <!-- FRONT: VIDEOS for "Thanh xuân" -->
+                    <div class="page-front page-paper">
+                        <div class="page-lines"></div>
+                        <div class="media-page">
+                            <div class="media-grid-page grid-4">
+                                <div class="media-item polaroid video-item">
+                                    <div class="photo-tape"></div>
+                                    <div class="media-content">
+                                        <video playsinline muted loop autoplay>
+                                            <source src="assets/images/p6%204%20vd/7530467281242.mp4" type="video/mp4">
+                                        </video>
+                                    </div>
+                                </div>
+                                <div class="media-item polaroid video-item">
+                                    <div class="photo-tape tape-style-2"></div>
+                                    <div class="media-content">
+                                        <video playsinline muted loop autoplay>
+                                            <source src="assets/images/p6%204%20vd/7530467377059.mp4" type="video/mp4">
+                                        </video>
+                                    </div>
+                                </div>
+                                <div class="media-item polaroid video-item">
+                                    <div class="photo-tape tape-style-3"></div>
+                                    <div class="media-content">
+                                        <video playsinline muted loop autoplay>
+                                            <source src="assets/images/p6%204%20vd/7530473606014.mp4" type="video/mp4">
+                                        </video>
+                                    </div>
+                                </div>
+                                <div class="media-item polaroid video-item">
+                                    <div class="photo-tape tape-style-4"></div>
+                                    <div class="media-content">
+                                        <video playsinline muted loop autoplay>
+                                            <source src="assets/images/p6%204%20vd/7530475452765.mp4" type="video/mp4">
+                                        </video>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- BACK: TEXT transition -->
+                    <div class="page-back page-paper">
+                        <div class="page-lines"></div>
+                        <div class="story-text-back text-only-back">
+                            <div class="corner-note top-right">nghe nè ♡</div>
+                            <p class="handwritten-text big-text">
+                                "Lắm lúc anh nghĩ<br>mình lời ghê chứ..."
+                            </p>
+                            <p class="handwritten-text big-text" style="color: #e91e63;">
+                                "Yêu một cô<br>mà được tận mấy cô..."
+                            </p>
+                            <div class="corner-note bottom-left">hiểu chưa~</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==================== PAGE 7: TRANSITION (No media) ==================== -->
+                <div class="book-page" id="page-7">
+                    <!-- FRONT: Text only -->
+                    <div class="page-front page-paper">
+                        <div class="page-lines"></div>
+                        <div class="page-content-single text-only-page">
+                            <p class="handwritten-text warning-text">
+                                Khoan chửi anh nha!
+                            </p>
+                            <p class="handwritten-text">
+                                Ý anh là em có nhiều phiên bản đáng yêu lắm...
+                            </p>
+                        </div>
+                    </div>
+                    <!-- BACK: TEXT for "Deth!" -->
+                    <div class="page-back page-paper">
+                        <div class="page-lines"></div>
+                        <div class="story-text-back">
+                            <div class="corner-note top-left">deth quá đi ♡</div>
+                            <p class="handwritten-text">
+                                "Cô này thì deth không chịu nổi...<br>
+                                awww 🥺"
+                            </p>
+                            <div class="corner-note bottom-right">yêu mất~</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==================== PAGE 8: CUTE (1 Image + 2 Videos) ==================== -->
+                <div class="book-page" id="page-8">
+                    <!-- FRONT: IMAGE + VIDEOS cute -->
+                    <div class="page-front page-paper">
+                        <div class="page-lines"></div>
+                        <div class="media-page">
+                            <div class="media-grid-page grid-3">
+                                <div class="media-item polaroid">
+                                    <div class="photo-tape tape-style-2"></div>
+                                    <div class="media-content">
+                                        <img src="assets/images/p8%201%20h%C3%ACnh%202%20vd/z7530453683670_2a6133f97522ee990415d7511a3e7752.jpg"
+                                            alt="Dễ thương"
+                                            onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect fill=%22%23ffe4ec%22 width=%22200%22 height=%22200%22/><text x=%22100%22 y=%22110%22 text-anchor=%22middle%22 font-size=%2260%22>🥺</text></svg>'">
+                                    </div>
+                                </div>
+                                <div class="media-item polaroid video-item">
+                                    <div class="photo-tape"></div>
+                                    <div class="media-content">
+                                        <video playsinline muted loop autoplay>
+                                            <source src="assets/images/p8%201%20h%C3%ACnh%202%20vd/7530449404564.mp4"
+                                                type="video/mp4">
+                                        </video>
+                                    </div>
+                                </div>
+                                <div class="media-item polaroid video-item">
+                                    <div class="photo-tape tape-style-3"></div>
+                                    <div class="media-content">
+                                        <video playsinline muted loop autoplay>
+                                            <source src="assets/images/p8%201%20h%C3%ACnh%202%20vd/7530505228799.mp4"
+                                                type="video/mp4">
+                                        </video>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- BACK: TEXT for "Cool ngầu" -->
+                    <div class="page-back page-paper">
+                        <div class="page-lines"></div>
+                        <div class="story-text-back">
+                            <div class="corner-note top-right">ngầu lắm ♡</div>
+                            <p class="handwritten-text">
+                                "Cô này thì cool ngầu kinh khủng.<br>
+                                Hâm mộ vá diii!"
+                            </p>
+                            <div class="corner-note bottom-left">cool ghê~</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==================== PAGE 9: COOL (3 Images) ==================== -->
+                <div class="book-page" id="page-9">
+                    <!-- FRONT: IMAGES cool -->
+                    <div class="page-front page-paper">
+                        <div class="page-lines"></div>
+                        <div class="media-page">
+                            <div class="media-grid-page grid-3">
+                                <div class="media-item polaroid">
+                                    <div class="photo-tape"></div>
+                                    <div class="media-content">
+                                        <img src="assets/images/p9%203%20h%C3%ACnh/z7530445253956_b405c69e952d75adf2381b73983b1547.jpg"
+                                            alt="Cool 1"
+                                            onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect fill=%22%23e0e7ff%22 width=%22200%22 height=%22200%22/><text x=%22100%22 y=%22110%22 text-anchor=%22middle%22 font-size=%2260%22>😎</text></svg>'">
+                                    </div>
+                                </div>
+                                <div class="media-item polaroid">
+                                    <div class="photo-tape tape-style-4"></div>
+                                    <div class="media-content">
+                                        <img src="assets/images/p9%203%20h%C3%ACnh/z7531033725765_7f13c85cdd2b3ec9d3ee16089f4a6ea9.jpg"
+                                            alt="Cool 2"
+                                            onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect fill=%22%23e0e7ff%22 width=%22200%22 height=%22200%22/><text x=%22100%22 y=%22110%22 text-anchor=%22middle%22 font-size=%2260%22>🕶️</text></svg>'">
+                                    </div>
+                                </div>
+                                <div class="media-item polaroid">
+                                    <div class="photo-tape tape-style-2"></div>
+                                    <div class="media-content">
+                                        <img src="assets/images/p9%203%20h%C3%ACnh/z7531035740162_cf2ebaf5558f0f990ae70c9816c72cda.jpg"
+                                            alt="Cool 3"
+                                            onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect fill=%22%23e0e7ff%22 width=%22200%22 height=%22200%22/><text x=%22100%22 y=%22110%22 text-anchor=%22middle%22 font-size=%2260%22>✨</text></svg>'">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- BACK: TEXT for "Tiểu thư" -->
+                    <div class="page-back page-paper">
+                        <div class="page-lines"></div>
+                        <div class="story-text-back">
+                            <div class="corner-note top-left">tiểu thư à ♡</div>
+                            <p class="handwritten-text">
+                                "Cô tiểu thư này<br>
+                                từ trong truyện bước ra à..."
+                            </p>
+                            <div class="corner-note bottom-right">đẹp lắm~</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==================== PAGE 10: PRINCESS (3 Images) ==================== -->
+                <div class="book-page" id="page-10">
+                    <!-- FRONT: IMAGES princess -->
+                    <div class="page-front page-paper">
+                        <div class="page-lines"></div>
+                        <div class="media-page">
+                            <div class="media-grid-page grid-3">
+                                <div class="media-item polaroid">
+                                    <div class="photo-tape tape-style-3"></div>
+                                    <div class="media-content">
+                                        <img src="assets/images/p10%203%20h%C3%ACnh/z7530459952565_b9812d51c740cbc26e3c759d72762ba9.jpg"
+                                            alt="Tiểu thư 1"
+                                            onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect fill=%22%23fff8e1%22 width=%22200%22 height=%22200%22/><text x=%22100%22 y=%22110%22 text-anchor=%22middle%22 font-size=%2260%22>👸</text></svg>'">
+                                    </div>
+                                </div>
+                                <div class="media-item polaroid">
+                                    <div class="photo-tape"></div>
+                                    <div class="media-content">
+                                        <img src="assets/images/p10%203%20h%C3%ACnh/z7530461684449_17f98d9c5a6b933b6ac525f094cb3106.jpg"
+                                            alt="Tiểu thư 2"
+                                            onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect fill=%22%23fff8e1%22 width=%22200%22 height=%22200%22/><text x=%22100%22 y=%22110%22 text-anchor=%22middle%22 font-size=%2260%22>👑</text></svg>'">
+                                    </div>
+                                </div>
+                                <div class="media-item polaroid">
+                                    <div class="photo-tape tape-style-2"></div>
+                                    <div class="media-content">
+                                        <img src="assets/images/p10%203%20h%C3%ACnh/z7530486758423_3464fe923658ff9758a8a1022b4ec962.jpg"
+                                            alt="Tiểu thư 3"
+                                            onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect fill=%22%23fff8e1%22 width=%22200%22 height=%22200%22/><text x=%22100%22 y=%22110%22 text-anchor=%22middle%22 font-size=%2260%22>✨</text></svg>'">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- BACK: TEXT for "Siu Ngố" -->
+                    <div class="page-back page-paper">
+                        <div class="page-lines"></div>
+                        <div class="story-text-back">
+                            <div class="corner-note top-right">ngố quá đi ♡</div>
+                            <p class="handwritten-text">
+                                "Cô nàng siu ngố:<br>
+                                lắm lúc cũm khùm dữ lắm kkkk"
+                            </p>
+                            <div class="corner-note bottom-left">dễ thương~</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==================== PAGE 11: SIU NGỐ (3 Videos) ==================== -->
+                <div class="book-page" id="page-11">
+                    <!-- FRONT: VIDEOS siu ngố -->
+                    <div class="page-front page-paper">
+                        <div class="page-lines"></div>
+                        <div class="media-page">
+                            <div class="media-grid-page grid-3">
+                                <div class="media-item polaroid video-item">
+                                    <div class="photo-tape tape-style-4"></div>
+                                    <div class="media-content">
+                                        <video playsinline muted loop autoplay>
+                                            <source src="assets/images/p11%203%20vd/7530420111104.mp4" type="video/mp4">
+                                        </video>
+                                    </div>
+                                </div>
+                                <div class="media-item polaroid video-item">
+                                    <div class="photo-tape tape-style-2"></div>
+                                    <div class="media-content">
+                                        <video playsinline muted loop autoplay>
+                                            <source src="assets/images/p11%203%20vd/7530424217992.mp4" type="video/mp4">
+                                        </video>
+                                    </div>
+                                </div>
+                                <div class="media-item polaroid video-item">
+                                    <div class="photo-tape"></div>
+                                    <div class="media-content">
+                                        <video playsinline muted loop autoplay>
+                                            <source src="assets/images/p11%203%20vd/7530445171400.mp4" type="video/mp4">
+                                        </video>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- BACK: TEXT for "Xưa & Nay" -->
+                    <div class="page-back page-paper">
+                        <div class="page-lines"></div>
+                        <div class="story-text-back">
+                            <div class="corner-note top-left">kỷ niệm ♡</div>
+                            <p class="handwritten-text">
+                                "Em của ngày xưa<br>và bây giờ nè :)))"
+                            </p>
+                            <div class="corner-note bottom-right">đáng yêu~</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==================== PAGE 12: XƯA & NAY (Compare Images) ==================== -->
+                <div class="book-page" id="page-12">
+                    <!-- FRONT: Xưa và Nay comparison -->
+                    <div class="page-front page-paper">
+                        <div class="page-lines"></div>
+                        <div class="page-content-single">
+                            <p class="handwritten-text" style="margin-bottom: 1vh;">
+                                "Em của ngày xưa và bây giờ nè :)))"
+                            </p>
+                            <div class="media-row compare-row">
+                                <div class="media-item polaroid small">
+                                    <div class="photo-tape"></div>
+                                    <div class="media-content">
+                                        <img src="assets/images/x%C6%B0a%20v%C3%A0%20nay/xua.JPG" alt="Ngày xưa"
+                                            onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect fill=%22%23f5efe6%22 width=%22200%22 height=%22200%22/><text x=%22100%22 y=%22110%22 text-anchor=%22middle%22 font-size=%2260%22>🌸</text></svg>'">
+                                    </div>
+                                    <div class="media-caption">Ngày xưa 🌸</div>
+                                </div>
+                                <span class="compare-arrow">→</span>
+                                <div class="media-item polaroid small">
+                                    <div class="photo-tape tape-style-2"></div>
+                                    <div class="media-content">
+                                        <img src="assets/images/x%C6%B0a%20v%C3%A0%20nay/nay.PNG" alt="Bây giờ"
+                                            onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect fill=%22%23f5efe6%22 width=%22200%22 height=%22200%22/><text x=%22100%22 y=%22110%22 text-anchor=%22middle%22 font-size=%2260%22>💖</text></svg>'">
+                                    </div>
+                                    <div class="media-caption">Bây giờ 💖</div>
+                                </div>
+                            </div>
+                            <div class="corner-note bottom-right">lúc nào cũng xink~</div>
+                        </div>
+                    </div>
+                    <!-- BACK: TEXT for "Kết" -->
+                    <div class="page-back page-paper">
+                        <div class="page-lines"></div>
+                        <div class="story-text-back">
+                            <div class="corner-note top-right">luôn bên em ♡</div>
+                            <p class="handwritten-text">
+                                "Dù như nào thì cũng là<br>
+                                em bé bỏng của anh thoi.<br>
+                                Cưn nhắm! 💕"
+                            </p>
+                            <div class="corner-note bottom-left">mãi mãi~</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==================== PAGE 13: CONCLUSION ==================== -->
+                <div class="book-page" id="page-13">
+                    <!-- FRONT: Final text + button -->
+                    <div class="page-front page-paper">
+                        <div class="page-lines"></div>
+                        <div class="page-content-single final-page">
+                            <div class="corner-note top-left">yêu em mãi ♡</div>
+                            <p class="handwritten-text big-text">
+                                "Dù như nào thì cũng là<br>
+                                em bé bỏng của anh thoi.<br>
+                                Cưn nhắm! 💕"
+                            </p>
+                            <div class="corner-note bottom-right">vĩnh viễn~</div>
+                            <a href="timer.html" class="continue-btn" id="continue-btn">
+                                <span>Tiếp tục nào</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- BACK: Back cover -->
+                    <div class="page-back page-back-cover">
+                        <div class="back-cover-content">
+                            <span class="end-text">The End... ?</span>
+                            <span class="end-heart">♡</span>
+                            <span class="end-subtext">(còn tiếp)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page indicator -->
+            <div class="page-indicator">
+                <i class="fas fa-book-open"></i>
+                <span id="current-page">1</span> / <span id="total-pages">13</span>
+            </div>
+        </div>
+
+        <!-- Navigation hint -->
+        <div class="nav-hint">
+            <i class="fas fa-hand-pointer"></i>
+            <span>Chạm vào góc sách để lật trang</span>
+        </div>
+    </section>
+
+    <!-- Back to home button -->
+    <a href="index.html" class="back-home-btn" title="Về trang chủ">
+        <i class="fas fa-home"></i>
+    </a>
+
+    <!-- Music Toggle -->
+    <button id="music-toggle" class="music-toggle visible" title="Bật/Tắt nhạc">
+        <i class="fas fa-music"></i>
+    </button>
+
+    <!-- Background Music -->
+    <audio id="bg-music" loop>
+        <source src="assets/music/1.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="diary.js"></script>
+</body>
+
+</html>
