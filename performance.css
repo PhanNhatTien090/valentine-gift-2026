@@ -1,0 +1,229 @@
+/**
+ * ==================== PERFORMANCE OPTIMIZATIONS ====================
+ * High-performance CSS for smooth animations on all devices
+ * GPU acceleration, compositing layers, layout containment
+ */
+
+/* ==================== GPU ACCELERATION HINTS ==================== */
+
+/* Force GPU compositing for animated elements */
+.star-3d,
+.shooting-star,
+.floating-heart,
+.star-layer,
+.nebula,
+.page-content,
+.book-page,
+.photobook,
+.left-page,
+.photobook-wrapper,
+.stat-card,
+.timer-unit,
+.sphere-wrapper,
+.lightbox,
+.end-toast,
+.start-toast {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+/* will-change for frequently animated elements */
+.star-3d {
+    will-change: opacity;
+}
+
+.shooting-star {
+    will-change: transform, opacity;
+}
+
+.star-layer {
+    will-change: transform;
+}
+
+.book-page {
+    will-change: transform;
+}
+
+.left-page,
+.photobook {
+    will-change: transform, opacity;
+}
+
+/* ==================== LAYOUT CONTAINMENT ==================== */
+
+/* Isolate layout recalculations */
+.starfield-3d,
+#starfield-3d {
+    contain: strict;
+}
+
+.section-diary,
+.section-timer,
+.section-gallery,
+.section-finale {
+    contain: layout style;
+}
+
+.photobook-wrapper {
+    contain: layout;
+}
+
+.book-page,
+.page-content {
+    contain: layout style paint;
+}
+
+.stat-card {
+    contain: layout style;
+}
+
+/* ==================== OPTIMIZE ANIMATION TIMING ==================== */
+
+/* Use optimal timing functions for smoothness */
+.star-3d,
+.star-layer-far,
+.star-layer-mid,
+.star-layer-near {
+    animation-timing-function: linear;
+}
+
+.shooting-star {
+    animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* ==================== REDUCE PAINT COMPLEXITY ==================== */
+
+/* Simplify box-shadow during animations */
+@media (prefers-reduced-motion: no-preference) {
+    .stat-card:active,
+    .book-page:active {
+        box-shadow: none !important;
+    }
+}
+
+/* ==================== OPTIMIZE SCROLLING ==================== */
+
+body,
+html {
+    scroll-behavior: auto; /* Disable smooth scroll for better perf */
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Touch optimization */
+.photobook,
+.left-page,
+.sphere-wrapper,
+.stat-card,
+.continue-btn,
+.music-toggle {
+    touch-action: manipulation;
+}
+
+/* ==================== IMAGE OPTIMIZATION ==================== */
+
+/* Content visibility for off-screen images */
+.page-content img,
+.polaroid img,
+.photo-grid img {
+    content-visibility: auto;
+    contain-intrinsic-size: 200px 150px;
+}
+
+/* Lazy loading support */
+img[loading="lazy"] {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+img[loading="lazy"].loaded,
+img.loaded {
+    opacity: 1;
+}
+
+/* ==================== REDUCE ANIMATION JANK ==================== */
+
+/* Optimize star twinkle animation */
+@keyframes twinkle-optimized {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+/* Use steps() for less smooth but more performant animations when needed */
+@media (prefers-reduced-motion: reduce) {
+    .star-3d,
+    .floating-heart,
+    .shooting-star {
+        animation: none !important;
+    }
+    
+    .star-layer {
+        transform: none !important;
+    }
+}
+
+/* ==================== LOW POWER MODE DETECTION ==================== */
+
+/* Reduce animations on low-end devices */
+@media screen and (max-width: 768px) {
+    .nebula {
+        display: none; /* Hide heavy blur effects on mobile */
+    }
+    
+    .star-3d {
+        animation-duration: 4s !important; /* Slower animation = less repaints */
+    }
+}
+
+/* ==================== FONT RENDERING ==================== */
+
+body {
+    text-rendering: optimizeSpeed;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==================== POINTER EVENTS OPTIMIZATION ==================== */
+
+/* Disable pointer events on decorative elements */
+.star-3d,
+.shooting-star,
+.nebula,
+.page-lines,
+.corner-note {
+    pointer-events: none;
+}
+
+/* ==================== CSS GRID/FLEXBOX OPTIMIZATION ==================== */
+
+/* Prevent layout thrashing */
+.photo-grid,
+.stats-grid,
+.timer-display {
+    contain: layout;
+}
+
+/* ==================== COMPOSITE LAYER MANAGEMENT ==================== */
+
+/* Limit compositing layers on mobile */
+@media screen and (max-width: 768px) {
+    .star-layer-far .star-3d,
+    .star-layer-mid .star-3d {
+        will-change: auto; /* Remove will-change hint */
+    }
+}
+
+/* ==================== INTERSECTION OBSERVER SUPPORT ==================== */
+
+/* Initial hidden state for lazy elements */
+.lazy-animate {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.lazy-animate.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}

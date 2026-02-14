@@ -2,7 +2,8 @@
 
 document.addEventListener('DOMContentLoaded', function () {
     // ==================== 3D STARFIELD BACKGROUND ====================
-    create3DStarfield(100);
+    const starCount = window.PerfUtils ? window.PerfUtils.getOptimalStarCount(100) : 100;
+    create3DStarfield(starCount);
 
     // ==================== MUSIC CONTROL ====================
     initMusicControl();
@@ -339,10 +340,19 @@ function init3DPhotoSphere() {
     let prevPos = { x: 0, y: 0 };
     let velocity = { x: 0, y: 0 };
     let hoveredCard = null;
+    let isPageVisible = true;
+    
+    // Page visibility detection
+    document.addEventListener('visibilitychange', () => {
+        isPageVisible = !document.hidden;
+    });
 
-    // Animation
+    // Animation with visibility check
     function animate() {
         requestAnimationFrame(animate);
+        
+        // Skip rendering when page is not visible
+        if (!isPageVisible) return;
 
         const time = Date.now() * 0.001;
 

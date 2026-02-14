@@ -27,8 +27,9 @@ const elements = {
 document.addEventListener('DOMContentLoaded', () => {
     console.log('💝 Photobook Page Initialized');
 
-    // Create 3D starfield background
-    create3DStarfield(150);
+    // Create 3D starfield background (use optimized count)
+    const starCount = window.PerfUtils ? window.PerfUtils.getOptimalStarCount(150) : 150;
+    create3DStarfield(starCount);
 
     // Initialize photobook
     initializePhotobook();
@@ -143,11 +144,37 @@ function setup3DParallax(container, layers) {
 }
 
 function createShootingStars(container) {
+    // Use object pool for better performance
+    if (window.PerfUtils && window.PerfUtils.ShootingStarPool) {
+        const pool = new window.PerfUtils.ShootingStarPool(container, 8);
+        
+        // Add first shooting star
+        setTimeout(() => {
+            const sizeRoll = Math.random();
+            const size = sizeRoll < 0.25 ? 'small' : sizeRoll > 0.85 ? 'large' : 'normal';
+            pool.acquire(size);
+        }, 1000);
+        
+        // Add shooting stars periodically (longer interval for performance)
+        setInterval(() => {
+            const sizeRoll = Math.random();
+            const size = sizeRoll < 0.25 ? 'small' : sizeRoll > 0.85 ? 'large' : 'normal';
+            pool.acquire(size);
+            
+            // Sometimes add second for shower effect
+            if (Math.random() > 0.8) {
+                setTimeout(() => pool.acquire('small'), 300);
+            }
+        }, 2500); // Slightly longer interval
+        
+        return;
+    }
+    
+    // Fallback to original implementation
     function addShootingStar() {
         const shootingStar = document.createElement('div');
         shootingStar.className = 'shooting-star';
 
-        // Random size: 60% normal, 25% small, 15% large
         const sizeRoll = Math.random();
         if (sizeRoll < 0.25) {
             shootingStar.classList.add('small');
@@ -155,30 +182,20 @@ function createShootingStars(container) {
             shootingStar.classList.add('large');
         }
 
-        // Random starting position (top area)
         shootingStar.style.left = Math.random() * 80 + '%';
         shootingStar.style.top = Math.random() * 30 + '%';
 
         container.appendChild(shootingStar);
 
-        // Remove after animation
         const duration = shootingStar.classList.contains('small') ? 800 :
             shootingStar.classList.contains('large') ? 1500 : 1200;
-        setTimeout(() => {
-            shootingStar.remove();
-        }, duration);
+        setTimeout(() => shootingStar.remove(), duration);
     }
 
-    // Add first shooting star quickly
     setTimeout(addShootingStar, 1000);
-
-    // Add shooting stars more frequently (every 1.5-3 seconds)
     setInterval(() => {
         addShootingStar();
-        // Sometimes add a second one for a "shower" effect
-        if (Math.random() > 0.7) {
-            setTimeout(addShootingStar, 300);
-        }
+        if (Math.random() > 0.7) setTimeout(addShootingStar, 300);
     }, 2000);
 }
 
