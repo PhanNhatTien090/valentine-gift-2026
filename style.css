@@ -664,6 +664,7 @@ body::-webkit-scrollbar-thumb {
     position: relative;
     width: 100vw;
     height: 100vh;
+    height: 100dvh; /* Dynamic viewport height for mobile */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -676,55 +677,104 @@ body::-webkit-scrollbar-thumb {
 
 /* ===== PHOTOBOOK WRAPPER - Handles centering logic ===== */
 .photobook-wrapper {
+    /* CSS Custom Properties for consistent sizing */
+    /* Fallback for browsers without dvh/svh support */
+    --book-height: 80vh;
+    --book-width: calc(var(--book-height) * 0.6875);
+    
     position: relative;
     perspective: 2500px;
+    -webkit-perspective: 2500px;
+    
+    /* Flexbox fallback for older browsers */
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
-    flex-wrap: nowrap;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
     flex-direction: row;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
     align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
     justify-content: center;
+    gap: 0;
+    
     width: 100%;
     height: 100%;
     pointer-events: none;
-    overflow: hidden;
+    overflow: visible;
     transition: transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
+    -webkit-transition: -webkit-transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+/* Modern browsers with dvh support */
+@supports (height: 1dvh) {
+    .photobook-wrapper {
+        --book-height: min(80vh, 80dvh);
+    }
 }
 
 /* When book is open, show left page */
 .photobook-wrapper.book-open {
     transform: translateX(0);
-    justify-content: center;
+    -webkit-transform: translateX(0);
 }
 
 /* ===== LEFT PAGE - Text content ===== */
 .left-page {
     position: relative;
-    width: 55vh;
-    height: 80vh;
-    max-height: 80vh;
+    width: var(--book-width, 55vh);
+    height: var(--book-height, 80vh);
+    min-height: var(--book-height, 80vh);
+    max-height: var(--book-height, 80vh);
+    
+    /* Flexbox alignment with webkit */
+    -webkit-box-flex: 0;
+    -webkit-flex-shrink: 0;
     flex-shrink: 0;
+    -webkit-align-self: center;
     align-self: center;
+    
     background: linear-gradient(135deg, #fdfbf7 0%, #f8f4eb 100%);
     border-radius: 10px 0 0 10px;
     box-shadow: 
         -5px 0 15px rgba(0,0,0,0.1),
         inset 5px 0 15px rgba(139, 90, 43, 0.08);
+    
+    /* Inner flexbox with webkit */
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    
     opacity: 0;
+    -webkit-transform: translateX(-30px);
     transform: translateX(-30px);
     pointer-events: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     overflow: visible;
-    margin-right: -2px; /* Connect with right page */
+    margin-right: -2px;
     z-index: 5;
+    
+    -webkit-transition: opacity 0.6s ease 0.4s, -webkit-transform 0.6s ease 0.4s;
     transition: opacity 0.6s ease 0.4s, transform 0.6s ease 0.4s;
 }
 
 .photobook-wrapper.book-open .left-page {
     opacity: 1;
     transform: translateX(0);
+    -webkit-transform: translateX(0);
     pointer-events: auto;
     cursor: pointer;
 }
@@ -854,11 +904,21 @@ body::-webkit-scrollbar-thumb {
 /* ===== PHOTOBOOK - Single page book ===== */
 .photobook {
     position: relative;
-    width: 55vh;  /* Single page width */
-    height: 80vh; /* 80% of viewport height */
+    width: var(--book-width, 55vh);
+    height: var(--book-height, 80vh);
+    min-height: var(--book-height, 80vh);
+    max-height: var(--book-height, 80vh);
+    
+    /* Flexbox alignment with webkit */
+    -webkit-box-flex: 0;
+    -webkit-flex-shrink: 0;
     flex-shrink: 0;
+    -webkit-align-self: center;
     align-self: center;
+    
+    -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
+    -webkit-transition: -webkit-transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
     transition: transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
     overflow: hidden;
     pointer-events: auto;
@@ -1921,10 +1981,17 @@ body::-webkit-scrollbar-thumb {
 
 /* ===== PHOTOBOOK RESPONSIVE - Mobile Landscape ===== */
 @media screen and (max-height: 500px) and (orientation: landscape) {
+    .photobook-wrapper {
+        --book-height: 88vh;
+        --book-width: calc(var(--book-height) * 0.65);
+    }
+    
     .photobook,
     .left-page {
-        width: 60vh;
-        height: 90vh;
+        width: var(--book-width);
+        height: var(--book-height);
+        min-height: var(--book-height);
+        max-height: var(--book-height);
     }
     
     .photobook-wrapper.book-open {
@@ -2017,10 +2084,17 @@ body::-webkit-scrollbar-thumb {
 }
 
 @media screen and (max-height: 400px) and (orientation: landscape) {
+    .photobook-wrapper {
+        --book-height: 85vh;
+        --book-width: calc(var(--book-height) * 0.65);
+    }
+    
     .photobook,
     .left-page {
-        width: 55vh;
-        height: 85vh;
+        width: var(--book-width);
+        height: var(--book-height);
+        min-height: var(--book-height);
+        max-height: var(--book-height);
     }
     
     .photobook-wrapper.book-open {
@@ -2075,15 +2149,18 @@ body::-webkit-scrollbar-thumb {
 /* ===== MOBILE PHONE RESPONSIVE - Various Screen Sizes ===== */
 /* Small phones (iPhone SE, older phones) */
 @media screen and (max-width: 700px) and (orientation: landscape) {
-    .photobook,
-    .left-page {
-        width: 45vw;
-        height: 90vh;
-        max-height: 90vh;
+    .photobook-wrapper {
+        --book-height: 88vh;
+        --book-width: 44vw;
+        gap: 0;
     }
     
-    .photobook-wrapper {
-        gap: 0;
+    .photobook,
+    .left-page {
+        width: var(--book-width);
+        height: var(--book-height);
+        min-height: var(--book-height);
+        max-height: var(--book-height);
     }
     
     .left-content .handwritten-text {
@@ -2120,11 +2197,17 @@ body::-webkit-scrollbar-thumb {
 
 /* Medium phones */
 @media screen and (max-width: 850px) and (min-width: 701px) and (orientation: landscape) {
+    .photobook-wrapper {
+        --book-height: 86vh;
+        --book-width: 42vw;
+    }
+    
     .photobook,
     .left-page {
-        width: 42vw;
-        height: 88vh;
-        max-height: 88vh;
+        width: var(--book-width);
+        height: var(--book-height);
+        min-height: var(--book-height);
+        max-height: var(--book-height);
     }
     
     .left-content .handwritten-text {
@@ -2141,11 +2224,17 @@ body::-webkit-scrollbar-thumb {
 
 /* Tall phones (iPhone X, 11, 12, 13, 14, Samsung Galaxy) */
 @media screen and (max-height: 450px) and (orientation: landscape) {
+    .photobook-wrapper {
+        --book-height: 84vh;
+        --book-width: 42vw;
+    }
+    
     .photobook,
     .left-page {
-        width: 42vw;
-        height: 85vh;
-        max-height: 85vh;
+        width: var(--book-width);
+        height: var(--book-height);
+        min-height: var(--book-height);
+        max-height: var(--book-height);
     }
     
     .media-grid-page .polaroid {
@@ -2204,10 +2293,17 @@ body::-webkit-scrollbar-thumb {
 
 /* Very short phones */
 @media screen and (max-height: 380px) and (orientation: landscape) {
+    .photobook-wrapper {
+        --book-height: 82vh;
+        --book-width: 40vw;
+    }
+    
     .photobook,
     .left-page {
-        width: 40vw;
-        height: 82vh;
+        width: var(--book-width);
+        height: var(--book-height);
+        min-height: var(--book-height);
+        max-height: var(--book-height);
     }
     
     .left-content {
